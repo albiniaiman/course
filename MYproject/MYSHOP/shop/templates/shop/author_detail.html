@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block content %}
+<div style="height: 500px; margin-top: -75px; margin-left: 300px">
+  <h1>Full name: {{ author.first_name}} {{ author.last_name }}</h1>
+
+  <p><strong>Birth date:</strong>{{ author.date_of_birth }}</p>
+  <p><strong>Death date:</strong> {% if author.date_of_death == None %} Still alive{% else %}{{ author.date_of_death }}
+  {% endif %} </p>
+</div>
+{% endblock %}

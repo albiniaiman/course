@@ -1,0 +1,18 @@
+{% extends "basic.html" %}
+{% load static%}
+
+{% block content%}
+    <h1>Author List</h1>
+
+    {% if all_authors %}
+    <ul>
+      {% for author in all_authors %}
+      <li>
+        {{ author.first_name }} {{ author.last_name }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>There are no authors in the shop.</p>
+    {% endif %}
+{% endblock %}

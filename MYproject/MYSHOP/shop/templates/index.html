@@ -1,0 +1,59 @@
+{% extends "basic.html" %}
+{% load static%}
+{% block links %}
+<link rel="stylesheet" href={% static "css/Slaider.css" %}>
+{% endblock %}
+
+{% block content%}
+    <blockquote>
+        <p>
+            “Я знаю, що нічого не знаю”
+        </p>
+        <cite>Сократ</cite>
+    </blockquote>
+    <div class="slideshow-container">
+        <figure class="mySlides fade">
+          <img src="../static/images/slider1.jpg" alt="">
+        </figure>
+        <figure class="mySlides fade">
+          <img src="../static/images/slider2.jpg"  alt="">
+        </figure>
+<figure class="mySlides fade">
+          <img src="../static/images/slider2.jpg"  alt="">
+        </figure>
+        <figure class="mySlides fade">
+          <img src="../static/images/slider1.jpg" alt="">
+        </figure>
+      <div id="pause_btn<>">
+      <a class="prev" onclick="plusSlides(-1)"><</a>
+      <a class="next" onclick="plusSlides(1)">></a>
+      </div>
+    </div>
+     <div  style="text-align:center" id="playBtn">
+        <span class="dot" onclick="dot_slide(1)"></span>
+        <span class="dot" onclick="dot_slide(2)"></span>
+        <span class="dot" onclick="dot_slide(3)"></span>
+        <span class="dot" onclick="dot_slide(4)"></span>
+    </div>
+    <h2>MOST POPULAR</h2>
+    {% if most_popular_books %}
+    <ul>
+      {% for book in most_popular_books %}
+          <div class ="">
+                  <li  class="li_style" >
+
+                          <figure>
+                                  <a href="{{ book.get_absolute_url }}">{{ book.title }}</a><br>(<a href="{{ book.author.get_absolute_url }}">{{book.author}}</a>)
+                                  <img src="{{ book.photo.url }}" width="120" height="120" alt="">
+                                <figcaption><span>{{ book.cost }}</span></figcaption>
+                          </figure>
+
+                  </li>
+                  </div>
+      {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
+{% block links2 %}
+    <script type ="text/javascript" src="/static/JS/Slaider.js"></script>
+{% endblock %}

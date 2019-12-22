@@ -1,0 +1,52 @@
+﻿{% extends "basic.html" %}
+{% load static %}
+{% block title %}
+    <title>Shopping cart</title>
+{% endblock %}
+{% block content %}
+    <h1>Shopping cart</h1>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Book</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Unit cost</th>
+            <th>Cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart.books %}
+            {% with book=cart.book %}
+                <tr>
+                    <td>
+                        <a href="{{ book.get_absolute_url }}">
+                            <img src="
+                                {% if book.photo %}
+                                    {{ book.photo.url }}
+                                {% else %}
+                                    {% static "images/grey-default.png" %}
+                                {% endif %}" alt="">
+                        </a>
+                    </td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ cart.quantity }}</td>
+                    <td><a href="{% url "cart:cart_remove" book.id%}">Remove</a></td>
+                    <td class="num">${{ cart.cost }}</td>
+                    <td class="num">${{ cart.total_cost }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_cost }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "shop:book_list" %}" class="button light">Continue shopping</a>
+        <a href="#" class="button">Checkout</a>
+    </p>
+{% endblock %}

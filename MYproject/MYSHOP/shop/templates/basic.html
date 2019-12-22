@@ -1,0 +1,112 @@
+﻿{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{% block title %}
+	<title>&Aopf;&&HilbertSpace;</title>{% endblock %}
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="{% static 'JS/scripts.js' %}"></script>
+	<!-- Добавление дополнительного статического CSS файла -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block links %}
+{% endblock %}
+</head>
+
+<body>
+	<div id="wrapper">
+		<header>
+			<img src="../../static/images/testlogo2.jpg" alt="логотип">
+			<form name="search" action="{% url 'shop:search' %}" method="get">
+				<input type="search" id="ser" name="q" placeholder="Search" ><button type="submit">GO</button>
+			</form>
+			<nav class="upper-nav">
+				<ul class="top-menu">
+					<li><a href="{% url 'shop:home' %}">HOME</a></li>
+					<li class="active">ABOUT US</li>
+					<li><a href="{% url 'shop:books' %}">List of all books</a></li>
+					<li><a href="{% url 'shop:authors' %}">List of all authors</a></li>
+					<li><a href="{% url 'login' %}">login</a></li>
+                    <li><a href="{% url 'shop:signup' %}">registration</a></li>
+				</ul>
+                    <div class="basket_container">
+                        <a href="{% url 'cart:CartDetail' %}">Cart</a>
+                        <div class="basket-items">
+                            <ul class="">
+                            </ul>
+                        </div>
+                    </div>
+            </nav>
+			<div id="heading">
+				<h1>ABOUT US</h1>
+			</div>
+		</header>
+		{% block sidebar %}
+		<aside>
+			<nav>
+				<ul class="aside-menu">
+					<li class="active">Menu</li>
+					<li><a href="{% url 'shop:books' %}">List of all books</a></li>
+					<li><a href="/">My page {{ Users.name }}</a></li>
+					<li><a href="/">Для дома и офиса</a></li>
+					<li><a href="/">Бытовая техника</a></li>
+				</ul>
+			</nav>
+			<h2>OUR OFFICES</h2>
+			<p><img src="../../static/images/map-position.png" width="230" height="125" alt="Our offices"></p>
+		</aside>
+            <section>
+                {% endblock %}
+                {% block slide_show %}
+                {% endblock %}
+                {% block content %}{% endblock %}
+            </section>
+	</div>
+
+{% block links2 %}
+{% endblock %}
+	<footer>
+		<div id="footer">
+			<div id="faсebook">
+				<h3>FACEBOOK FEED</h3>
+				<time datetime="2012-10-23"><a href="#">23 oct</a></time>
+				<p>
+					Наша страничка в фейсбуке
+				</p>
+			</div>
+			<div id="sitemap">
+				<h3>SITEMAP</h3>
+				<div>
+					<a href="{% url 'shop:home' %}">Home</a>
+					<a href="/">About</a>
+					<a href="/">Services</a>
+				</div>
+				<div>
+					<a href="/">Partners</a>
+					<a href="/">Support</a>
+					<a href="/">Contact</a>
+				</div>
+			</div>
+            <script>
+            </script>
+			<div id="social">
+				<h3>SOCIAL NETWORKS</h3>
+				<a href="http://twitter.com/" class="social-icon twitter"></a>
+				<a href="http://facebook.com/" class="social-icon facebook"></a>
+				<a href="http://plus.google.com/" class="social-icon google-plus"></a>
+				<a href="http://youtube.com/" class="social-icon-small youtube"></a>
+				<a href="http://instagram.com/" class="social-icon-small instagram"></a>
+			</div>
+			<div id="footer-logo">
+				<a href="/"><img src="../../static/images/testlogo2.jpg" alt="логотип"></a>
+				<p>Copyright © 2019 &Aopf;&&HilbertSpace;. A pcklab creation</p>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
