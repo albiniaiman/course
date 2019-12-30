@@ -2,33 +2,29 @@
 {% load static %}
 
 {% block content %}
-<div style="height: 500px">
-  <h1>Title: {{ book.title }}</h1>
 
+<img src="{{ book.photo.url | safe }}" alt=""
+style="margin-left: 0px; margin-top: 10px; height: 300px; width: 250px; float: left;"/>
+
+
+<figure class="books_detail">
+  
+  <h1>Title: {{ book.title }}</h1>
+ 
   <p><strong>Author:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author.first_name }} {{ book.author.last_name }}</a></p> <!-- author detail link not yet defined -->
   <p><strong>Summary:</strong> {{ book.summary }}</p>
   <p><strong>ISBN:</strong> {{ book.isbn }}</p>
   <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
   <p><strong>Cost:</strong>{{ book.cost }} ₴</p>
-  <div>
-      <form id="form-buying_book" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
-          <input type="number" class="form-control" id="number" />
-          <button class="btn btn-success btn-buy" type="submit" id="submit_btn"
-          data-book_id = "{{ book.id }}"
-          data-title = "{{ book.title }}"
-          data-book_cost = "{{ book.cost }}"
-          >
-             купить
-          </button>
+  <p><a href="{{ book.get_absolute_id }}"><strong>Also books by this author</strong></a></p>
+  <figure class="buying">
+      <form method="POST" id="form-buying_book" class="form-inline" action="{% url 'shop:buy' %}">{% csrf_token %}
+          <input type="number" class="form-control" id="num" min='1' max='{{book.quantity}}' value ="1" name="num"/>
+          <input type="hidden" value="{{ book.id}}" name="book_id" id="book_id">
+          <button class="btn btn-success btn-buy"  type="submit" id="submit_btn" >BUY</button>
       </form>
-      <!--<p class="cost">цена грн.</p>
-        <form action="{% url "cart:CartAdd" book.pk %}" method="post">
-            {{ cart_book_form }}
-            {% csrf_token %}
-        <input type="submit" value="Добавить в корзину">
-        </form>-->
-  </div>
-  <img src="{{ book.photo.url | safe }}" alt=""
-         style="margin-left: 500px; margin-top: -275px; max-height: 250px; max-width: 300px"/>
-</div>
+  </figure>
+</figure>
+	
+
 {% endblock %}

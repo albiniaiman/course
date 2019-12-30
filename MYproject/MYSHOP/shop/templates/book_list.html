@@ -11,15 +11,15 @@
 
               {% for book in all_books %}
                   <div class ="">
-                  <li  class="li_style" >
+                  <li  class="li_style" > <a href="{{ book.get_absolute_url }}">
 
-                          <figure>
+                          <figure class="booksfigure">
 
                                   <img src="{{ book.photo.url }}" width="120" height="120" alt="">
-                               <a href="{{ book.get_absolute_url }}">{{ book.title }}</a><br>(<a href="{{ book.author.get_absolute_url }}">{{book.author}}</a>)
+                               <a >{{ book.title }}</a><br>(<a href="{{ book.author.get_absolute_url }}">{{book.author}}</a>)
                                 <figcaption><span>{{ book.cost }}</span></figcaption>
                           </figure>
-
+                        </a>
                   </li>
                   </div>
               {% endfor %}

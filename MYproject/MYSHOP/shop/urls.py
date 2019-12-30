@@ -6,6 +6,7 @@ app_name = "shop"
 urlpatterns = [
     path('', views.home, name="home"),
     path('search/', views.post_list, name="search"),
+    url(r'^author_book/(?P<pk>\d+)$', views.author_book, name="author_book"),
     path('books/', views.books, name="books"),
     path('authors/', views.authors, name="authors"),
     path('genres/', views.genres, name="genres"),
@@ -14,5 +15,5 @@ urlpatterns = [
     url(r'^author/(?P<pk>\d+)$', views.AuthorDetailView.as_view(), name='author-detail'),
     url(r'^signup/$', views.signup, name='signup'),
     path('profile/', views.profile, name="profile"),
-    path('basket_adding/', views.basket_adding, name="basket_adding"),
+    url(r'^buy/$', views.buy, name='buy'),
 ]

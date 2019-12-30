@@ -8,7 +8,7 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from cart.forms import CartAddBookForm
-
+from .forms import buyForm
 
 def home(request):
     most_popular_books = Book.objects.exclude(quantity__exact=0)[:16]
@@ -18,11 +18,18 @@ def home(request):
 def post_list(request):
     search_query = request.GET.get('q', '')
     if search_query:
-        selected_books = Book.objects.filter(Q(title__icontains=search_query))
+        selected_books = Book.objects.filter(Q(title__icontains=search_query) | Q(author__last_name=search_query)| Q(author__first_name=search_query))
     else:
         selected_books = Book.objects.all()
     return render(request, 'book_list.html', context={'all_books': selected_books}, )
 
+def author_book(request,pk):
+    book = Book.objects.get(id=pk)
+    if book:
+        selected_books = Book.objects.filter(Q(author__last_name=book.author.last_name))
+    else:
+        selected_books = Book.objects.all()
+    return render(request, 'book_list.html', context={'all_books': selected_books}, )
 
 def books(request):
     all_books = Book.objects.all()
@@ -43,12 +50,9 @@ def genres(request):
 #    model = Book
 def exp_book(request, pk):
     book = Book.objects.get(id=pk)
-    session_key = request.session.session_key
-    if not session_key:
-        request.session.cycle_key()
+    return render(request, 'shop/book_detail.html', locals(),)
 
-    print(request.session.session_key)
-    return render(request, 'shop/book_detail.html', locals(), )
+
 
 
 class AuthorDetailView(generic.DetailView):
@@ -64,7 +68,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('/shop')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -77,7 +81,6 @@ def basket_adding(request):
     return JsonResponse(return_dict)
 
 
-"""
 def book_det(request, book_id):
     book = Book.objects.get(id=book_id)
     return render(request, 'shop/book_detail.html', locals())
@@ -89,7 +92,7 @@ def BookDetail(request, iD, slug):
     return render_to_response('shop/book_detail.html',
                               {'book': book,
                                'cart_book_form': cart_book_form})
-"""
+
 
 
 def book_detail(request, pk):
@@ -99,6 +102,16 @@ def book_detail(request, pk):
     cart_book_form = CartAddBookForm()
     return render(request, 'shop/book_detail.html', {'book': book,
                                                      'cart_book_form': cart_book_form})
+
+def buy(request):
+    if request.method == "POST":
+        form = buyForm(request.POST)
+        if form.is_valid():
+            book_id = form.cleaned_data['book_id']
+            book = Book.objects.get(id=book_id)
+            quantity = form.cleaned_data['num']
+            total_price = quantity*book.cost
+            return render(request, 'shop/buy_book.html', context={'book': book, 'quantity': quantity, 'total_price': total_price}, )
 
 
 @login_required

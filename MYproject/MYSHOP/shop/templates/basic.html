@@ -10,7 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="{% static 'JS/scripts.js' %}"></script>
+	
 	<!-- Добавление дополнительного статического CSS файла -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% block links %}
@@ -20,6 +20,7 @@
 <body>
 	<div id="wrapper">
 		<header>
+
 			<img src="../../static/images/testlogo2.jpg" alt="логотип">
 			<form name="search" action="{% url 'shop:search' %}" method="get">
 				<input type="search" id="ser" name="q" placeholder="Search" ><button type="submit">GO</button>
@@ -31,39 +32,40 @@
 					<li><a href="{% url 'shop:books' %}">List of all books</a></li>
 					<li><a href="{% url 'shop:authors' %}">List of all authors</a></li>
 					<li><a href="{% url 'login' %}">login</a></li>
-                    <li><a href="{% url 'shop:signup' %}">registration</a></li>
+					<li><a href="{% url 'shop:signup' %}">registration</a></li>
 				</ul>
-                    <div class="basket_container">
-                        <a href="{% url 'cart:CartDetail' %}">Cart</a>
-                        <div class="basket-items">
-                            <ul class="">
-                            </ul>
-                        </div>
-                    </div>
-            </nav>
+			</header>
 			<div id="heading">
-				<h1>ABOUT US</h1>
+				<h1>&Aopf;&&HilbertSpace;shop</h1>
 			</div>
-		</header>
+			</nav>
+			
+			
+		
 		{% block sidebar %}
 		<aside>
 			<nav>
 				<ul class="aside-menu">
 					<li class="active">Menu</li>
 					<li><a href="{% url 'shop:books' %}">List of all books</a></li>
-					<li><a href="/">My page {{ Users.name }}</a></li>
-					<li><a href="/">Для дома и офиса</a></li>
-					<li><a href="/">Бытовая техника</a></li>
+					{% if user.is_authenticated %}
+					<li>User: {{ user.get_username}}</li>
+					<li><a href="{% url 'logout' %}"> logout</a></li>
+					{% else %}
+					<li><a href="{% url 'login' %}">login</a></li>
+					{%endif%}
 				</ul>
 			</nav>
 			<h2>OUR OFFICES</h2>
 			<p><img src="../../static/images/map-position.png" width="230" height="125" alt="Our offices"></p>
 		</aside>
+		{% endblock %}
             <section>
-                {% endblock %}
+               
                 {% block slide_show %}
                 {% endblock %}
-                {% block content %}{% endblock %}
+				{% block content %}
+				{% endblock %}
             </section>
 	</div>
 

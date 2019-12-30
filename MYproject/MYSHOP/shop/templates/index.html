@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content%}
-    <blockquote>
-        <p>
+    <blockquote class="qoute">
+        <p >  
             “Я знаю, що нічого не знаю”
         </p>
         <cite>Сократ</cite>
@@ -18,12 +18,13 @@
         <figure class="mySlides fade">
           <img src="../static/images/slider2.jpg"  alt="">
         </figure>
-<figure class="mySlides fade">
-          <img src="../static/images/slider2.jpg"  alt="">
-        </figure>
         <figure class="mySlides fade">
           <img src="../static/images/slider1.jpg" alt="">
         </figure>
+<figure class="mySlides fade">
+          <img src="../static/images/slider2.jpg"  alt="">
+        </figure>
+        
       <div id="pause_btn<>">
       <a class="prev" onclick="plusSlides(-1)"><</a>
       <a class="next" onclick="plusSlides(1)">></a>
@@ -40,16 +41,17 @@
     <ul>
       {% for book in most_popular_books %}
           <div class ="">
-                  <li  class="li_style" >
+                  <li  class="li_style" ><a href="{{ book.get_absolute_url }}">
 
-                          <figure>
-                                  <a href="{{ book.get_absolute_url }}">{{ book.title }}</a><br>(<a href="{{ book.author.get_absolute_url }}">{{book.author}}</a>)
+                          <figure class="booksfigure"> 
+                                 
                                   <img src="{{ book.photo.url }}" width="120" height="120" alt="">
+                                  <a>{{ book.title }}</a><br>(<a href="{{ book.author.get_absolute_url }}">{{book.author}}</a>)
                                 <figcaption><span>{{ book.cost }}</span></figcaption>
                           </figure>
-
+                        </a>
                   </li>
-                  </div>
+              </div>
       {% endfor %}
     </ul>
     {% endif %}

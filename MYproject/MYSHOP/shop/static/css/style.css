@@ -44,20 +44,27 @@ nav ul {
 .upper-nav ul
 {
 	float: left;
-	justify-content: center;
-}
+		justify-content: center;
+	}
 nav li {
 	list-style-position: inside;
 	font: 14px 'Oswald', sans-serif;
 	padding: 10px;
 }
 
-.top-menu li {
+.top-menu li  {
+	width: 130px;
+	text-align: center;
 	display: inline-block;
-	padding: 10px 30px;
+
 	margin: 0;
 }
-
+.top-menu li a {
+	
+	text-align: center;
+	text-decoration: none;
+	font-size: 17px;
+}
 .top-menu li.active {
 	background: #29c5e6;
 	color: #fff;
@@ -86,6 +93,7 @@ aside {
 	width: 250px;
 }
 section{
+	margin-top: 60px;
 	width: 730px;
 	margin-left: 280px;
 	padding-bottom: 50px;
@@ -146,12 +154,29 @@ blockquote cite {
 	text-align: right;
 }
 figure {
+	background-color: white;
 	display: inline-block;
 	margin: 0;
 	font-family: 'Oswald', sans-serif;
 	font-weight: 300;
 }
-
+figure.booksfigure {
+	width:130px;
+	height: 200px;
+	background-color: white;
+	display: inline-block;
+	margin: 0;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	padding: 10px;
+	padding-top: 15px;
+	padding-left: 15px;
+	border-radius: 10px;
+	border: 1mm ridge #4cdeff;
+}
+figure.booksfigure:hover{
+	border: 1mm ridge #7e7e7e;
+}
 figure img {
 	display: block;
 	border: 1px solid #fff;
@@ -344,4 +369,39 @@ footer a {
 	padding: 10px;
 	background:#4cdeff;
 	display: none;
+}
+.books_detail{
+	height: 450px;
+	width: 500px;
+	margin-left: 350px;
+	margin-top: -300px;
+	border: 1mm ridge #29c5e6;
+}
+.books_detail p{
+	color: black;
+	font-size: 15px;
+	margin-left: 20px;
+}
+.books_detail input{
+	border-radius: 10px;
+	width:40px;
+font-size: 20px;
+text-align: center;
+}
+.books_detail button {
+	border-radius: 7px;
+	width: 100px;
+	margin-left: 50px;
+}
+
+figure.buying button:hover{
+background-color: #1d8ea6;
+}
+figure.buying{
+	width: 200px;
+	height: 35px;
+	margin-top: 20px;
+	margin-left: 160px;
+	border-radius: 10px;
+	border: 1mm ridge #4cdeff;
 }

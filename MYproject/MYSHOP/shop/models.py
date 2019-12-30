@@ -15,6 +15,10 @@ class Genre(models.Model):
         return self.name
 
 
+
+
+
+
 class Book(models.Model):
     """
     Model representing a book (but not a specific copy of a book).
@@ -50,6 +54,11 @@ class Book(models.Model):
         Returns the url to access a particular book instance.
         """
         return reverse('shop:book-detail', args=[str(self.id)])
+    def get_absolute_id(self):
+        """
+        Returns the url to access a particular book instance.
+        """
+        return reverse('shop:author_book', args=[str(self.id)])
 
 
 class Author(models.Model):
